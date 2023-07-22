@@ -2,19 +2,23 @@
 import { galleryItems } from "./gallery-items.js";
 //! Change code below this line
 
-// Імпортуємо файли стилів basicLightbox
-// import "basiclightbox/dist/basicLightbox.min.css";
+//// Імпортуємо файли стилів basicLightbox
+//// import "basiclightbox/dist/basicLightbox.min.css";
 
-// Імпортуємо бібліотеку basicLightbox
-// import * as basicLightbox from "basiclightbox";
+//// Імпортуємо бібліотеку basicLightbox
+//// import * as basicLightbox from "basiclightbox";
 
 //* Step 1: Create and render gallery markup
 //* Створимо розмітку галереї на підставі масиву даних galleryItems і наданого шаблону елемента галереї
+
+//  константа galleryList отримує посилання на елемент списку <ul> з класом .gallery.
 const galleryList = document.querySelector(".gallery");
 
-//! Функція для створення розмітки елементів галереї
+//! Ф-ція для створення розмітки елементів галереї
+//* генеруємо рядок розмітки для кожного зображення в рядку шаблона (template string) з
+//* використовуємо деструктуризацію об'єкта для отримання властивостей 'preview', 'original' та 'description' з кожного об'єкта item у масиві galleryItems.
 
-//! -------     ВАРІАНТ 1  (.map)   ---------------
+//! -------     ВАРІАНТ 1  одним записом (map)   ---------------
 // function createGalleryMarkup(items) {
 //   return items
 //     .map(
@@ -45,43 +49,74 @@ function createGalleryItem(item) {
   `;
 }
 
-const galleryMarkup = galleryItems.map(createGalleryItem).join("");
-galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
+//* Викликаємо ф-цію createGalleryItem для кожного об'єкта item у масиві galleryItems за допомогою методу .map().
+//* Отримані розмітка об'єднується (join) - створення одного рядка зі всією розміткою.
 
-console.log(galleryItems);
+const galleryMarkup = galleryItems.map(createGalleryItem).join("");
+
+//* додаємо розмітку до <ul>-елементу з класом '.gallery' ('insertAdjacentHTML')
+galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
 
 //* Step 2: Implement the event listener for opening the modal
 //* Додамо скрипт і стилі бібліотеки basicLightbox та підключимо їх за допомогою CDN
 
+// обробник подій onGalleryItemClick на елемент <ul> з класом .gallery, що буде викликатися при кліку на дочірні елементи.
 galleryList.addEventListener("click", onGalleryItemClick);
 
+// ф-ція викликається при кліку на елемент галереї.
 function onGalleryItemClick(event) {
-  event.preventDefault();
+  event.preventDefault(); //* Запобігаємо перенаправленню на іншу сторінку (event.preventDefault())
   const clickedItem = event.target;
+
+  //* Перевіряємо, чи клікнуті елемент є зображенням (<img>)
   if (clickedItem.classList.contains("gallery__image")) {
-    const imageUrl = clickedItem.dataset.source;
-    openModal(imageUrl);
+    const imageUrl = clickedItem.dataset.source; //* Якщо так, то отримуємо URL повнорозмірного зображення з атрибуту data-source
+    openModal(imageUrl); //* викликаємо ф-цію openModal, передаючи URL зображення як аргумент.
   }
 }
 
+//! -------     ВАРІАНТ 2    ---------------
+// galleryList.addEventListener("click", onGalleryItemClick);
+
+// function onGalleryItemClick(event) {
+//   event.preventDefault();
+//   const clickedItem = event.target;
+//   if (clickedItem.classList.contains("gallery__image")) {
+//     const imageUrl = clickedItem.dataset.source;
+//     openModal(imageUrl);
+//   }
+// }
+
 //* Step 3: Open the modal
-//* Реалізуємо відкриття модального вікна при кліку на елемент галереї
+//* Відкриття модального вікна при кліку на елемент галереї
+//* Step 4: Replace the src attribute of the modal image
+//* Забезпечимо заміну значення атрибута src елемента <img> у модальному вікні перед відкриттям.
+
+//* ф-ція створює модальку з повнорозмірним зображенням при кліку на мініатюру:
+
+//* Використовуємо basicLightbox.create() для створення розмітки зображення модального вікна
+// Значення атрибута src задається змінною imageUrl, яка є URL повнорозмірного зображення (отримали з даних елемента галереї при кліку)
+// Коли модалка вікно відкриється за допомогою instance.show(), зображення з модального вікна отримає URL зображення, яке ми підставили в src.
+// Отже, відбудеться заміна значення атрибута src елемента < img > на повнорозмірне зображення, що дозволить переглядати зображення у великому розмірі в модальному вікні.
 function openModal(imageUrl) {
   const instance = basicLightbox.create(`
     <img src="${imageUrl}" width="800" height="600">
   `);
-  instance.show();
 
-  //* Step 4: Replace the src attribute of the modal image
-  //* Забезпечимо заміну значення атрибута src елемента <img> у модальному вікні перед відкриттям.
+  instance.show(); //?  відображається вікно
+
+  //* додаємо обробник на клавіатурні події
   document.addEventListener("keydown", onModalClose);
 
   //* Step 5: Close the modal on Escape key press
-  //* Додамо можливість закриття модального вікна за допомогою клавіші Escape.
+  //* Закриття модального вікна за допомогою клавіші Escape
+
   function onModalClose(event) {
     if (event.code === "Escape") {
-      instance.close();
-      document.removeEventListener("keydown", onModalClose);
+      instance.close(); //* якщо натиснуто клавішу "Escape" - закриваємо модалку (instance.close())
+      document.removeEventListener("keydown", onModalClose); //* При закритті модалки відключаємо обробник з документа, щоб уникнути накопичення обробників під час множинних відкриттів та закриттів модального вікна.
     }
   }
 }
+
+console.log(galleryItems);
