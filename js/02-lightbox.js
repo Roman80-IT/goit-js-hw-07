@@ -1,6 +1,6 @@
 import { galleryItems } from "./gallery-items.js";
 
-//* Step 1: Create and render gallery markup (same as in the previous task)
+//! Step 1: Create and render gallery markup (same as in the previous task)
 //* Створюємо розмітку галереї так само, як і в попередньому завданні
 
 const galleryList = document.querySelector(".gallery");
@@ -23,3 +23,21 @@ const galleryMarkup = galleryItems.map(createGalleryItem).join("");
 galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
 
 console.log(galleryItems);
+
+//! Step 2: Include the SimpleLightbox library using CDN links
+//* підключення бібліотеки SimpleLightbox - використовуємо імпорт з CDN для SimpleLightbox JS (simple-lightbox.min.js)
+import SimpleLightbox from "simplelightbox";
+//* та CSS стилів (simple-lightbox.min.css).
+import "simplelightbox/dist/simple-lightbox.min.css";
+
+//! Step 3: Initialize the SimpleLightbox library after gallery elements are added
+//* Ініціалізуємо бібліотеку, коли увесь контент сторінки завантажено.
+//* Це забезпечує те, що галерея буде належним чином побудована перед ініціалізацією (використовуємо DOMContentLoaded подію)
+document.addEventListener("DOMContentLoaded", function () {
+  new SimpleLightbox(".gallery a", {
+    captions: true, // Show image captions
+    captionDelay: 250, // Caption appears 250ms after image is shown
+  });
+});
+//* При ініціалізації SimpleLightbox ми передаємо селектор '.gallery a', щоб показати, що це елементи галереї.
+//*  Також передаємо об'єкт з параметрами для налаштування бібліотеки: встановлюємо параметри captions: true для відображення підписів до зображень та captionDelay: 250 для відображення підписів через 250 мілісекунд після відкриття зображення в модалці.
