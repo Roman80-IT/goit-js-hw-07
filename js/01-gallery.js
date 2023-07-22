@@ -51,7 +51,7 @@ galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
 console.log(galleryItems);
 
 //* Step 2: Implement the event listener for opening the modal
-//* Додамо скрипт і стилі бібліотеки basicLightbox та підключимо їх за допомогою CDN.
+//* Додамо скрипт і стилі бібліотеки basicLightbox та підключимо їх за допомогою CDN
 
 galleryList.addEventListener("click", onGalleryItemClick);
 
@@ -62,4 +62,13 @@ function onGalleryItemClick(event) {
     const imageUrl = clickedItem.dataset.source;
     openModal(imageUrl);
   }
+}
+
+//* Step 3: Open the modal
+//* Реалізуємо відкриття модального вікна при кліку на елемент галереї
+function openModal(imageUrl) {
+  const instance = basicLightbox.create(`
+    <img src="${imageUrl}" width="800" height="600">
+  `);
+  instance.show();
 }
