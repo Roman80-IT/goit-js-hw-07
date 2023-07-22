@@ -71,4 +71,17 @@ function openModal(imageUrl) {
     <img src="${imageUrl}" width="800" height="600">
   `);
   instance.show();
+
+  //* Step 4: Replace the src attribute of the modal image
+  //* Забезпечимо заміну значення атрибута src елемента <img> у модальному вікні перед відкриттям.
+  document.addEventListener("keydown", onModalClose);
+
+  //* Step 5: Close the modal on Escape key press
+  //* Додамо можливість закриття модального вікна за допомогою клавіші Escape.
+  function onModalClose(event) {
+    if (event.code === "Escape") {
+      instance.close();
+      document.removeEventListener("keydown", onModalClose);
+    }
+  }
 }
