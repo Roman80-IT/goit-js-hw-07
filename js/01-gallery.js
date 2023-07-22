@@ -45,4 +45,21 @@ function createGalleryItem(item) {
   `;
 }
 
+const galleryMarkup = galleryItems.map(createGalleryItem).join("");
+galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
+
 console.log(galleryItems);
+
+//* Step 2: Implement the event listener for opening the modal
+//* Додамо скрипт і стилі бібліотеки basicLightbox та підключимо їх за допомогою CDN.
+
+galleryList.addEventListener("click", onGalleryItemClick);
+
+function onGalleryItemClick(event) {
+  event.preventDefault();
+  const clickedItem = event.target;
+  if (clickedItem.classList.contains("gallery__image")) {
+    const imageUrl = clickedItem.dataset.source;
+    openModal(imageUrl);
+  }
+}
