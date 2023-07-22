@@ -36,8 +36,34 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 document.addEventListener("DOMContentLoaded", function () {
   new SimpleLightbox(".gallery a", {
     captions: true, // Show image captions
+    captionsData: "alt", // Use "alt" attribute as caption data
+    captionPosition: "bottom", // Show captions at the bottom
     captionDelay: 250, // Caption appears 250ms after image is shown
   });
 });
 //* При ініціалізації SimpleLightbox ми передаємо селектор '.gallery a', щоб показати, що це елементи галереї.
 //*  Також передаємо об'єкт з параметрами для налаштування бібліотеки: встановлюємо параметри captions: true для відображення підписів до зображень та captionDelay: 250 для відображення підписів через 250 мілісекунд після відкриття зображення в модалці.
+
+//! ------------------     ВАРІАНТ 2    --------------------
+// const galleryList = document.querySelector(".gallery");
+
+// setToGallery(createMarkup(galleryItems));
+
+// function createMarkup(galleryItems) {
+//   return galleryItems
+//     .map(
+//       ({ preview, original, description }) =>
+//         `<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${preview}" alt="${description}"/></a></li>`
+//     )
+//     .join("");
+// }
+
+// function setToGallery(gallery) {
+//   galleryList.innerHTML = gallery;
+// }
+// let lightbox = new SimpleLightbox(".gallery a", {
+//   captions: true,
+//   captionsData: "alt",
+//   captionPosition: "bottom",
+//   captionDelay: 250,
+// });
