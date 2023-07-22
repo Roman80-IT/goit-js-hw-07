@@ -6,7 +6,7 @@ import { galleryItems } from "./gallery-items.js";
 //// Імпортуємо бібліотеку basicLightbox
 //// import * as basicLightbox from "basiclightbox";
 
-//* Step 1: Create and render gallery markup
+//! Step 1: Create and render gallery markup
 //* Створимо розмітку галереї на підставі масиву даних 'galleryItems' і наданого шаблону елемента галереї
 
 //  отримуємо посилання на елемент списку <ul> з класом .gallery.
@@ -55,7 +55,7 @@ const galleryMarkup = galleryItems.map(createGalleryItem).join("");
 //* додаємо розмітку до <ul>-елементу з класом '.gallery' ('insertAdjacentHTML')
 galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
 
-//* Step 2: Implement the event listener for opening the modal
+//! Step 2: Implement the event listener for opening the modal
 //* Додамо скрипт і стилі бібліотеки basicLightbox та підключимо їх за допомогою CDN
 
 // обробник подій onGalleryItemClick на елемент <ul> з класом .gallery, що буде викликатися при кліку на дочірні елементи.
@@ -85,9 +85,9 @@ function onGalleryItemClick(event) {
 //   }
 // }
 
-//* Step 3: Open the modal
+//! Step 3: Open the modal
 //* Відкриття модального вікна при кліку на елемент галереї
-//* Step 4: Replace the src attribute of the modal image
+//! Step 4: Replace the src attribute of the modal image
 //* Заміна значення атрибута 'src' елемента <img> у модальному вікні перед відкриттям.
 
 //* Ф-ція створює модальку з повнорозмірним зображенням при кліку на мініатюру:
@@ -106,7 +106,7 @@ function openModal(imageUrl) {
   //* додаємо обробник на клавіатурні події
   document.addEventListener("keydown", onModalClose);
 
-  //* Step 5: Close the modal on Escape key press
+  //! Step 5: Close the modal on Escape key press
   //* Закриття модального вікна за допомогою клавіші Escape
 
   function onModalClose(event) {
