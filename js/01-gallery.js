@@ -1,17 +1,15 @@
 //* Імпортуємо масив з даними зображень
 import { galleryItems } from "./gallery-items.js";
-//! Change code below this line
 
 //// Імпортуємо файли стилів basicLightbox
 //// import "basiclightbox/dist/basicLightbox.min.css";
-
 //// Імпортуємо бібліотеку basicLightbox
 //// import * as basicLightbox from "basiclightbox";
 
 //* Step 1: Create and render gallery markup
-//* Створимо розмітку галереї на підставі масиву даних galleryItems і наданого шаблону елемента галереї
+//* Створимо розмітку галереї на підставі масиву даних 'galleryItems' і наданого шаблону елемента галереї
 
-//  константа galleryList отримує посилання на елемент списку <ul> з класом .gallery.
+//  отримуємо посилання на елемент списку <ul> з класом .gallery.
 const galleryList = document.querySelector(".gallery");
 
 //! Ф-ція для створення розмітки елементів галереї
@@ -49,8 +47,8 @@ function createGalleryItem(item) {
   `;
 }
 
-//* Викликаємо ф-цію createGalleryItem для кожного об'єкта item у масиві galleryItems за допомогою методу .map().
-//* Отримані розмітка об'єднується (join) - створення одного рядка зі всією розміткою.
+//* Викликаємо ф-цію createGalleryItem для кожного об'єкта item у масиві galleryItems за допомогою методу .map(),
+//* розмітка об'єднується (join) - створення одного рядка зі всією розміткою.
 
 const galleryMarkup = galleryItems.map(createGalleryItem).join("");
 
@@ -63,14 +61,14 @@ galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
 // обробник подій onGalleryItemClick на елемент <ul> з класом .gallery, що буде викликатися при кліку на дочірні елементи.
 galleryList.addEventListener("click", onGalleryItemClick);
 
-// ф-ція викликається при кліку на елемент галереї.
+// ф-ція викликається при кліку на елемент галереї
 function onGalleryItemClick(event) {
   event.preventDefault(); //* Запобігаємо перенаправленню на іншу сторінку (event.preventDefault())
   const clickedItem = event.target;
 
-  //* Перевіряємо, чи клікнуті елемент є зображенням (<img>)
+  //* Перевіряємо, чи клікнутий елемент є зображенням (<img>)
   if (clickedItem.classList.contains("gallery__image")) {
-    const imageUrl = clickedItem.dataset.source; //* Якщо так, то отримуємо URL повнорозмірного зображення з атрибуту data-source
+    const imageUrl = clickedItem.dataset.source; //* якщо так, то отримуємо 'URL' повнорозмірного зображення з атрибуту data-source
     openModal(imageUrl); //* викликаємо ф-цію openModal, передаючи URL зображення як аргумент.
   }
 }
@@ -90,9 +88,9 @@ function onGalleryItemClick(event) {
 //* Step 3: Open the modal
 //* Відкриття модального вікна при кліку на елемент галереї
 //* Step 4: Replace the src attribute of the modal image
-//* Забезпечимо заміну значення атрибута src елемента <img> у модальному вікні перед відкриттям.
+//* Заміна значення атрибута 'src' елемента <img> у модальному вікні перед відкриттям.
 
-//* ф-ція створює модальку з повнорозмірним зображенням при кліку на мініатюру:
+//* Ф-ція створює модальку з повнорозмірним зображенням при кліку на мініатюру:
 
 //* Використовуємо basicLightbox.create() для створення розмітки зображення модального вікна
 // Значення атрибута src задається змінною imageUrl, яка є URL повнорозмірного зображення (отримали з даних елемента галереї при кліку)
