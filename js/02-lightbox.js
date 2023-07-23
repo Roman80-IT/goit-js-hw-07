@@ -118,34 +118,36 @@
 //* Виправлення: Необхідно спершу створити HTML-код зображень галереї, а потім ініціалізувати SimpleLightbox.
 //* Тому було перенесено останню лінію коду setToGallery(createMarkup(galleryItems)); нижче, після ініціалізації SimpleLightbox.
 
-import { galleryItems } from "./gallery-items.js";
-const galleryList = document.querySelector(".gallery");
+// import { galleryItems } from "./gallery-items.js";
+// const galleryList = document.querySelector(".gallery");
 
-function createMarkup(galleryItems) {
-  return galleryItems
-    .map(
-      ({ preview, original, description }) =>
-        `<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${preview}" alt="${description}"/></a></li>`
-    )
-    .join("");
-}
+// function createMarkup(galleryItems) {
+//   return galleryItems
+//     .map(
+//       ({ preview, original, description }) =>
+//         `<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${preview}" alt="${description}"/></a></li>`
+//     )
+//     .join("");
+// }
 
-function setToGallery(gallery) {
-  galleryList.innerHTML = gallery;
-}
+// function setToGallery(gallery) {
+//   galleryList.innerHTML = gallery;
+// }
 
-//! Додати обробник події click для посилань і відмінити стандартну дію
-function preventDefaultAction(event) {
-  event.preventDefault();
-}
+// //! Додати обробник події click для посилань і відмінити стандартну дію
+// function preventDefaultAction(event) {
+//   event.preventDefault();
+// }
 
-galleryList.addEventListener("click", preventDefaultAction);
+// galleryList.addEventListener("click", preventDefaultAction);
 
-let lightbox = new SimpleLightbox(".gallery a", {
-  captions: true,
-  captionsData: "alt",
-  captionPosition: "bottom",
-  captionDelay: 250,
-});
+// let lightbox = new SimpleLightbox(".gallery a", {
+//   captions: true,
+//   captionsData: "alt",
+//   captionPosition: "bottom",
+//   captionDelay: 250,
+// });
 
-setToGallery(createMarkup(galleryItems));
+// setToGallery(createMarkup(galleryItems));
+
+//! ------------- Виправлення 2 ----------------
