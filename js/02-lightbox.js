@@ -164,6 +164,55 @@
 //*    Завершимо, запускаючи побудову галереї, викликавши ф-цію setToGallery(createMarkup(galleryItems));.
 //*    Ці зміни дозволяють працювати як з SimpleLightbox, так і з галереєю, і виправляють проблему, зі збільшенням зображень при кліку.
 
+// import { galleryItems } from "./gallery-items.js";
+// const galleryList = document.querySelector(".gallery");
+
+// function createMarkup(galleryItems) {
+//   return galleryItems
+//     .map(
+//       ({ preview, original, description }) =>
+//         `<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${preview}" alt="${description}" loading="lazy"/></a></li>`
+//     )
+//     .join("");
+// }
+
+// function setToGallery(gallery) {
+//   galleryList.innerHTML = gallery;
+// }
+
+// // Не змінено обробник події click для посилань, відмінено стандартну дію
+// function preventDefaultAction(event) {
+//   event.preventDefault();
+// }
+
+// galleryList.addEventListener("click", preventDefaultAction);
+
+// // Заключна версія функції створення SimpleLightbox
+// function initializeSimpleLightbox() {
+//   const galleryLinks = document.querySelectorAll(".gallery__link");
+//   galleryLinks.forEach((link) => {
+//     link.addEventListener("click", (event) => {
+//       event.preventDefault();
+//       new SimpleLightbox(link);
+//     });
+//   });
+// }
+
+// initializeSimpleLightbox();
+
+// // створення екземпляра бібліотеки SimpleLightbox з допомогою конструктора, що дозволяє налаштувати різні параметри для модалки, яке буде використовуватись для перегляду зображень в галереї.
+// const lightbox = new SimpleLightbox(".gallery a", {
+//   captions: true,
+//   captionsData: "alt",
+//   captionPosition: "bottom",
+//   captionDelay: 250,
+// });
+
+// // Запуск побудови галереї
+// setToGallery(createMarkup(galleryItems));
+
+//! ------------- Виправлення 3 ----------------
+
 import { galleryItems } from "./gallery-items.js";
 const galleryList = document.querySelector(".gallery");
 
@@ -180,27 +229,19 @@ function setToGallery(gallery) {
   galleryList.innerHTML = gallery;
 }
 
-// Не змінено обробник події click для посилань, відмінено стандартну дію
-function preventDefaultAction(event) {
-  event.preventDefault();
-}
-
-galleryList.addEventListener("click", preventDefaultAction);
-
-// Заключна версія функції створення SimpleLightbox
 function initializeSimpleLightbox() {
   const galleryLinks = document.querySelectorAll(".gallery__link");
   galleryLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
-      new SimpleLightbox(link);
+      new SimpleLightbox(link.parentNode); // Змінено на parentNode для пошуку посилання на зображення
     });
   });
 }
 
+// Запускаємо ініціалізацію обробників подій
 initializeSimpleLightbox();
 
-// створення екземпляра бібліотеки SimpleLightbox з допомогою конструктора, що дозволяє налаштувати різні параметри для модалки, яке буде використовуватись для перегляду зображень в галереї.
 const lightbox = new SimpleLightbox(".gallery a", {
   captions: true,
   captionsData: "alt",
@@ -208,5 +249,5 @@ const lightbox = new SimpleLightbox(".gallery a", {
   captionDelay: 250,
 });
 
-// Запуск побудови галереї
+// Запускаємо побудову галереї
 setToGallery(createMarkup(galleryItems));
