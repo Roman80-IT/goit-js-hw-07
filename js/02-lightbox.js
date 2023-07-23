@@ -208,5 +208,5 @@ const lightbox = new SimpleLightbox(".gallery a", {
   captionDelay: 250,
 });
 
-// Запустимо побудову галереї
+// Запуск побудови галереї
 setToGallery(createMarkup(galleryItems));
