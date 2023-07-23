@@ -96,7 +96,7 @@
 
 //! ------------- Виправлення ----------------
 //! "не відкривається модальне вікно, а починається скачування зображення"
-//* замість відкриття модалки для перегляду зображень, відбувається скролінг сторінки. Це може статися, якщо виникає конфлікт між бібліотекою SimpleLightbox і стандартною поведінкою браузера для зображень у тегах <a>.
+//* замість відкриття модалки для перегляду зображень, відбувається скролінг сторінки. Це можливо, якщо виникає конфлікт між бібліотекою SimpleLightbox і стандартною поведінкою браузера для зображень у тегах <a>.
 //* Стандартна дія посилань (зображень) не була відмінена, і браузер відкривав зображення у новому вікні замість показу модального вікна.
 
 //* Щоб це виправити, необхідно заборонити стандартну дію посилань на зображення.
@@ -212,42 +212,83 @@
 // setToGallery(createMarkup(galleryItems));
 
 //! ------------- Виправлення 3 ----------------
+// import { galleryItems } from "./gallery-items.js";
+// const galleryList = document.querySelector(".gallery");
+
+// function createMarkup(galleryItems) {
+//   return galleryItems
+//     .map(
+//       ({ preview, original, description }) =>
+//         `<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${preview}" alt="${description}" loading="lazy"/></a></li>`
+//     )
+//     .join("");
+// }
+
+// function setToGallery(gallery) {
+//   galleryList.innerHTML = gallery;
+// }
+
+// function initializeSimpleLightbox() {
+//   const galleryLinks = document.querySelectorAll(".gallery__link");
+//   galleryLinks.forEach((link) => {
+//     link.addEventListener("click", (event) => {
+//       event.preventDefault();
+//       new SimpleLightbox(link.parentNode); // Змінено на parentNode для пошуку посилання на зображення
+//     });
+//   });
+// }
+
+// // Запускаємо ініціалізацію обробників подій
+// initializeSimpleLightbox();
+
+// const lightbox = new SimpleLightbox(".gallery a", {
+//   captions: true,
+//   captionsData: "alt",
+//   captionPosition: "bottom",
+//   captionDelay: 250,
+// });
+
+// // Запускаємо побудову галереї
+// setToGallery(createMarkup(galleryItems));
+
+//! ------------- ВАРІАНТ 4 ----------------
 
 import { galleryItems } from "./gallery-items.js";
-const galleryList = document.querySelector(".gallery");
 
-function createMarkup(galleryItems) {
+const galleryListEl = document.querySelector(".gallery");
+
+function createGalleryMarkup(galleryItems) {
   return galleryItems
     .map(
-      ({ preview, original, description }) =>
-        `<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${preview}" alt="${description}" loading="lazy"/></a></li>`
+      ({ description, preview, original }) =>
+        `<li class="gallery__item">
+          <a class="gallery__link" href="${original}">
+             <img class="gallery__image" src="${preview}" alt="${description}" />
+          </a>
+       </li>`
     )
     .join("");
 }
 
-function setToGallery(gallery) {
-  galleryList.innerHTML = gallery;
+function gallerySetToHtml(gallery) {
+  galleryListEl.innerHTML = gallery;
 }
 
 function initializeSimpleLightbox() {
-  const galleryLinks = document.querySelectorAll(".gallery__link");
-  galleryLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      new SimpleLightbox(link.parentNode); // Змінено на parentNode для пошуку посилання на зображення
-    });
+  const lightbox = new SimpleLightbox(".gallery a", {
+    captions: true,
+    captionsData: "alt",
+    captionPosition: "bottom",
+    captionDelay: 250,
   });
 }
 
-// Запускаємо ініціалізацію обробників подій
-initializeSimpleLightbox();
+// Функція для створення галереї та ініціалізації SimpleLightbox
+function createGallery() {
+  const galleryMarkup = createGalleryMarkup(galleryItems);
+  gallerySetToHtml(galleryMarkup);
+  initializeSimpleLightbox();
+}
 
-const lightbox = new SimpleLightbox(".gallery a", {
-  captions: true,
-  captionsData: "alt",
-  captionPosition: "bottom",
-  captionDelay: 250,
-});
-
-// Запускаємо побудову галереї
-setToGallery(createMarkup(galleryItems));
+// Запускаємо створення галереї з ініціалізацією SimpleLightbox
+createGallery();
