@@ -254,7 +254,7 @@
 
 import { galleryItems } from "./gallery-items.js";
 
-const galleryListEl = document.querySelector(".gallery");
+const galleryList = document.querySelector(".gallery");
 
 function createGalleryMarkup(galleryItems) {
   return galleryItems
@@ -270,7 +270,7 @@ function createGalleryMarkup(galleryItems) {
 }
 
 function gallerySetToHtml(gallery) {
-  galleryListEl.innerHTML = gallery;
+  galleryList.innerHTML = gallery;
 }
 
 function initializeSimpleLightbox() {
