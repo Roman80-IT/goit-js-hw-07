@@ -68,7 +68,52 @@
 //   captionDelay: 250,
 // });
 
-//! ------------------     ВАРІАНТ 3    --------------------
+//! ------------------     ВАРІАНТ 3 (основний beta)   --------------------
+// import { galleryItems } from "./gallery-items.js";
+// const galleryList = document.querySelector(".gallery");
+
+// function createMarkup(galleryItems) {
+//   return galleryItems
+//     .map(
+//       ({ preview, original, description }) =>
+//         `<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${preview}" alt="${description}"/></a></li>`
+//     )
+//     .join("");
+// }
+
+// function setToGallery(gallery) {
+//   galleryList.innerHTML = gallery;
+// }
+
+// let lightbox = new SimpleLightbox(".gallery a", {
+//   captions: true,
+//   captionsData: "alt",
+//   captionPosition: "bottom",
+//   captionDelay: 250,
+// });
+
+// setToGallery(createMarkup(galleryItems));
+
+//! ------------- Виправлення ----------------
+//! "не відкривається модальне вікно, а починається скачування зображення"
+
+//* замість відкриття модалки для перегляду зображень, відбувається скролінг сторінки. Це може статися, якщо виникає конфлікт між бібліотекою SimpleLightbox і стандартною поведінкою браузера для зображень у тегах <a>.
+//* Стандартна дія посилань (зображень) не була відмінена, і браузер відкривав зображення у новому вікні замість показу модального вікна.
+
+//* Щоб це виправити, необхідно заборонити стандартну дію посилань на зображення.
+//* Для цього можна модифікувати HTML та CSS або використовувати JS:
+
+//* Виправлення: Для відміни стандартної дії посилань, коли користувач клікає на зображення, було додано обробник події click на елементі .gallery, і цей обробник просто викликає метод preventDefault() для події.
+//* Це запобігає стандартній дії посилань і зупиняє відкриття посилання в новому вікні.
+
+//? ---------------------------------------------------------
+//? Додано:
+// function preventDefaultAction(event) {
+//   event.preventDefault();
+// }
+
+// galleryList.addEventListener("click", preventDefaultAction);
+//? ---------------------------------------------------------
 
 import { galleryItems } from "./gallery-items.js";
 const galleryList = document.querySelector(".gallery");
@@ -85,6 +130,13 @@ function createMarkup(galleryItems) {
 function setToGallery(gallery) {
   galleryList.innerHTML = gallery;
 }
+
+//! Додати обробник події click для посилань і відмінити стандартну дію
+function preventDefaultAction(event) {
+  event.preventDefault();
+}
+
+galleryList.addEventListener("click", preventDefaultAction);
 
 let lightbox = new SimpleLightbox(".gallery a", {
   captions: true,
