@@ -245,7 +245,7 @@ function openModal(imageUrl) {
 
 function onModalClose(event) {
   if (event.code === "Escape") {
-    basicLightbox.close(); // Закриваємо модалку (basicLightbox.close())
+    basicLightbox.close(); // Закриття модалки
   }
 }
 
