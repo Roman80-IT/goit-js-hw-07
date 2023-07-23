@@ -200,7 +200,7 @@ function initializeSimpleLightbox() {
 
 initializeSimpleLightbox();
 
-// Збережемо легковагу версію бібліотеки в змінну, щоб зберегти її актуальність
+// створення екземпляра бібліотеки SimpleLightbox з допомогою конструктора, що дозволяє налаштувати різні параметри для модалки, яке буде використовуватись для перегляду зображень в галереї.
 const lightbox = new SimpleLightbox(".gallery a", {
   captions: true,
   captionsData: "alt",
