@@ -225,6 +225,51 @@ function onGalleryItemClick(event) {
   openModal(imageUrl);
 }
 
+//! -------------   Потрібно виправити 2  ----------------
+// function openModal(imageUrl) {
+//   const instance = basicLightbox.create(
+//     `<img src="${imageUrl}" width="800" height="600">`,
+//     {
+//       onShow: (instance) => {
+//         console.log("onShow", instance);
+//         document.addEventListener("keydown", onModalClose);
+//       },
+//       onClose: (instance) => {
+//         console.log("onClose", instance);
+//         document.removeEventListener("keydown", onModalClose);
+//       },
+//     }
+//   );
+
+//   instance.show(); // Відображаємо вікно
+// }
+
+// function onModalClose(event) {
+//   if (event.code === "Escape") {
+//     basicLightbox.close(); // Закриття модалки //! помилка в консолі (відсутність ф-ції)
+//   }
+// }
+
+// console.log(galleryItems);
+//! ------------- Виправлення ----------------
+//! помилка в консолі (відсутність ф-ції)
+//! Uncaught TypeError:
+//! basicLightbox.close (рядок: basicLightbox.close();) is not a function at HTMLDocument.onModalClose
+
+//* означає, що JS не може знайти ф-цію basicLightbox.close().
+//* Помилка виникає тому, що викликається метод close() на об'єкті basicLightbox, який, не підтримує такий метод.
+//* Використовував basicLightbox.create(), щоб створити новий екземпляр модального вікна,
+//* але basicLightbox не містить методу close() для закриття цього екземпляра.
+
+//?  спробуйте перенести ф-цію закриття саме у відкриття  тому що за її межами не снує basicLightbox.close
+//? і також міняємо його на наш екземпляр класу   instance.close()
+
+//* замінюю basicLightbox.close() на instance.close(),
+//* оскільки instance є екземпляром модального вікна, створеним з допомогою basicLightbox.create().
+//* Після цієї зміни ф-ція instance.close() буде використовуватись для закриття модального вікна під час натискання клавіші "Escape".
+
+//! ------------- Виправлений варіант 2 ----------------
+
 function openModal(imageUrl) {
   const instance = basicLightbox.create(
     `<img src="${imageUrl}" width="800" height="600">`,
@@ -241,12 +286,10 @@ function openModal(imageUrl) {
   );
 
   instance.show(); // Відображаємо вікно
-}
 
-function onModalClose(event) {
-  if (event.code === "Escape") {
-    basicLightbox.close(); // Закриття модалки
+  function onModalClose(event) {
+    if (event.code === "Escape") {
+      instance.close(); // Закриття модалки
+    }
   }
 }
-
-console.log(galleryItems);
