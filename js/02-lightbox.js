@@ -319,6 +319,9 @@
 
 //* виконуємо створення галереї, встановлення її HTML та ініціалізацію SimpleLightbox одразу після створення розмітки.
 
+import { galleryItems } from "./gallery-items.js";
+//! Change code below this line
+
 const galleryList = document.querySelector(".gallery");
 
 gallerySetToHtml(createGalleryMarkup(galleryItems));
