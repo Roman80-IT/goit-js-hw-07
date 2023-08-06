@@ -253,9 +253,62 @@
 
 //! ------------- ВАРІАНТ 4 ----------------
 
-import { galleryItems } from "./gallery-items.js";
+// import { galleryItems } from "./gallery-items.js";
+
+// const galleryList = document.querySelector(".gallery");
+
+// function createGalleryMarkup(galleryItems) {
+//   return galleryItems
+//     .map(
+//       ({ description, preview, original }) =>
+//         `<li class="gallery__item">
+//           <a class="gallery__link" href="${original}">
+//              <img class="gallery__image" src="${preview}" alt="${description}" />
+//           </a>
+//        </li>`
+//     )
+//     .join("");
+// }
+
+// function gallerySetToHtml(gallery) {
+//   galleryList.innerHTML = gallery;
+// }
+
+// function initializeSimpleLightbox() {
+//   const lightbox = new SimpleLightbox(".gallery a", {
+//     captions: true,
+//     captionsData: "alt",
+//     captionPosition: "bottom",
+//     captionDelay: 250,
+//   });
+// }
+
+// //* Функція для створення галереї та ініціалізації SimpleLightbox
+// function createGallery() {
+//   const galleryMarkup = createGalleryMarkup(galleryItems);
+//   gallerySetToHtml(galleryMarkup);
+//   initializeSimpleLightbox();
+// }
+
+// //* Запускаємо створення галереї з ініціалізацією SimpleLightbox
+// createGallery();
+
+//! ------------- ВАРІАНТ 5 ----------------
+
+//? "можна простіше - достатньо після додавання на сторінку зображень, залишити лише створення екземпляру модального вікна";
+
+//* виконуємо створення галереї, встановлення її HTML та ініціалізацію SimpleLightbox одразу після створення розмітки.
 
 const galleryList = document.querySelector(".gallery");
+
+gallerySetToHtml(createGalleryMarkup(galleryItems));
+
+let lightbox = new SimpleLightbox(".gallery a", {
+  captions: true,
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
+});
 
 function createGalleryMarkup(galleryItems) {
   return galleryItems
@@ -273,22 +326,3 @@ function createGalleryMarkup(galleryItems) {
 function gallerySetToHtml(gallery) {
   galleryList.innerHTML = gallery;
 }
-
-function initializeSimpleLightbox() {
-  const lightbox = new SimpleLightbox(".gallery a", {
-    captions: true,
-    captionsData: "alt",
-    captionPosition: "bottom",
-    captionDelay: 250,
-  });
-}
-
-// Функція для створення галереї та ініціалізації SimpleLightbox
-function createGallery() {
-  const galleryMarkup = createGalleryMarkup(galleryItems);
-  gallerySetToHtml(galleryMarkup);
-  initializeSimpleLightbox();
-}
-
-// Запускаємо створення галереї з ініціалізацією SimpleLightbox
-createGallery();
