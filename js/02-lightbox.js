@@ -1,3 +1,23 @@
+//! Бібліотека 'SimpleLightbox'
+//* Зроби таку саму галерею як в першому завданні, але використовуючи бібліотеку SimpleLightbox,
+//*  яка візьме на себе обробку кліків по зображеннях, відкриття і закриття модального вікна, а також гортання зображень за допомогою клавіатури
+
+//* Необхідно трохи змінити розмітку картки галереї, використовуй цей шаблон.
+// <li class="gallery__item">
+//   <a class="gallery__link" href="large-image.jpg">
+//      <img class="gallery__image" src="small-image.jpg" alt="Image description" />
+//   </a>
+// </li>
+
+//* Виконуй це завдання у файлах 02-lightbox.html і 02-lightbox.js. Розбий його на декілька підзавдань:
+
+//*   1. Створення і рендер розмітки на підставі масиву даних galleryItems і наданого шаблону елемента галереї. Використовуй готовий код з першого завдання.
+//*   2. Підключення скрипту і стилів бібліотеки, використовуючи CDN сервіс cdnjs. Необхідно додати посилання на два файли: simple-lightbox.min.js і simple-lightbox.min.css.
+//*   3. Ініціалізація бібліотеки після створення і додання елементів галереї у ul.gallery. Для цього ознайомся з документацією SimpleLightbox - насамперед секції «Usage» і «Markup».
+//*   4. Подивися в документації секцію «Options» і додай відображення підписів до зображень з атрибута alt. Нехай підпис буде знизу і з'являється через 250 мілісекунд після відкриття зображення.
+
+//! --------------------------------     ВАРІАНТ 1    ---------------------------------
+
 // import { galleryItems } from "./gallery-items.js";
 
 // //! Step 1: Create and render gallery markup (same as in the previous task)
@@ -180,14 +200,14 @@
 //   galleryList.innerHTML = gallery;
 // }
 
-// // Не змінено обробник події click для посилань, відмінено стандартну дію
+// //* Не змінено обробник події click для посилань, відмінено стандартну дію
 // function preventDefaultAction(event) {
 //   event.preventDefault();
 // }
 
 // galleryList.addEventListener("click", preventDefaultAction);
 
-// // Заключна версія функції створення SimpleLightbox
+// //* Заключна версія функції створення SimpleLightbox
 // function initializeSimpleLightbox() {
 //   const galleryLinks = document.querySelectorAll(".gallery__link");
 //   galleryLinks.forEach((link) => {
@@ -200,7 +220,7 @@
 
 // initializeSimpleLightbox();
 
-// // створення екземпляра бібліотеки SimpleLightbox з допомогою конструктора, що дозволяє налаштувати різні параметри для модалки, яке буде використовуватись для перегляду зображень в галереї.
+// //* створення екземпляра бібліотеки SimpleLightbox з допомогою конструктора, що дозволяє налаштувати різні параметри для модалки, яке буде використовуватись для перегляду зображень в галереї.
 // const lightbox = new SimpleLightbox(".gallery a", {
 //   captions: true,
 //   captionsData: "alt",
@@ -208,7 +228,7 @@
 //   captionDelay: 250,
 // });
 
-// // Запуск побудови галереї
+// //* Запуск побудови галереї
 // setToGallery(createMarkup(galleryItems));
 
 //! ------------- Виправлення 3 ----------------
@@ -238,7 +258,7 @@
 //   });
 // }
 
-// // Запускаємо ініціалізацію обробників подій
+// //* Запускаємо ініціалізацію обробників подій
 // initializeSimpleLightbox();
 
 // const lightbox = new SimpleLightbox(".gallery a", {
@@ -248,7 +268,7 @@
 //   captionDelay: 250,
 // });
 
-// // Запускаємо побудову галереї
+// //* Запускаємо побудову галереї
 // setToGallery(createMarkup(galleryItems));
 
 //! ------------- ВАРІАНТ 4 ----------------

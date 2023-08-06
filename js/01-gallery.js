@@ -1,10 +1,10 @@
 //* Імпортуємо масив з даними зображень
 // import { galleryItems } from "./gallery-items.js";
 
-//// Імпортуємо файли стилів basicLightbox
-//// import "basiclightbox/dist/basicLightbox.min.css";
-//// Імпортуємо бібліотеку basicLightbox
-//// import * as basicLightbox from "basiclightbox";
+//* Імпортуємо файли стилів basicLightbox
+//* import "basiclightbox/dist/basicLightbox.min.css";
+//* Імпортуємо бібліотеку basicLightbox
+//* import * as basicLightbox from "basiclightbox";
 
 //! Step 1: Create and render gallery markup
 //* Створимо розмітку галереї на підставі масиву даних 'galleryItems' і наданого шаблону елемента галереї
@@ -16,7 +16,7 @@
 //* генеруємо рядок розмітки для кожного зображення в рядку шаблона (template string) з
 //* використовуємо деструктуризацію об'єкта для отримання властивостей 'preview', 'original' та 'description' з кожного об'єкта item у масиві galleryItems.
 
-//! -------     ВАРІАНТ 1  одним записом (map)   ---------------
+//! -------------------------    ВАРІАНТ 1  одним записом (map)   ---------------------
 // function createGalleryMarkup(items) {
 //   return items
 //     .map(
@@ -31,7 +31,7 @@
 //     .join("");
 // }
 
-//! -------     ВАРІАНТ 2    ---------------
+//! --------------------------     ВАРІАНТ 2    -----------------------------------
 // function createGalleryItem(item) {
 //   return `
 //     <li class="gallery__item">
@@ -285,11 +285,11 @@ function openModal(imageUrl) {
     }
   );
 
-  instance.show(); // Відображаємо вікно
+  instance.show(); //* Відображаємо вікно
 
   function onModalClose(event) {
     if (event.code === "Escape") {
-      instance.close(); // Закриття модалки
+      instance.close(); //* Закриття модалки
     }
   }
 }
